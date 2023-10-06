@@ -16,14 +16,12 @@ But best is to test a screenreader on mac comm + f5
 */
 
 
-let hamburgerBtn = document.getElementsByClassName('hamburger-btn')
-let hamburger = document.getElementById("main-menu")
+const hamburgerBtn = document.querySelector('.hamburger-btn');
+const hamburgerMenu = document.querySelector('.hamburger-menu');
 
-hamburgerBtn.onclick = function(){
-   if ul.hamburger-menu.show-menu === "1") {
-    nav ul.hamburger-menu.show-menu li = 0
-   } else {
-    nav ul.hamburger-menu.show-menu li =1
-   } 
-   }
-}
+
+hamburgerBtn.addEventListener("click", function(){
+   hamburgerMenu.classList.toggle('show-menu');
+   hamburgerBtn.classList.toggle('close');
+});
+
