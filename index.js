@@ -1,21 +1,3 @@
-/* 
-App Behavior
-
-When the button.hamburger-btn element is clicked on smaller screens, the hamburger menu should open/close. Again, toggling the show-menu class on the .hamburger-menu element should show/hide the menu.
-Clicking outside of .hamburger-menu should close the menu if it is open.
-Clicking inside of .hamburger-menu should NOT close the menu.
-Pressing the Escape key when the menu is open should close the menu and focus button.hamburger-btn.
-
-Under all circumstances, when the menu is open, aria-expanded should be set to true on button.hamburger-btn, and set to false when the menu is closed.
-
-Use aria attributes to tell user that someting is hidden
-aria-hidden "true" can tell a screen reader to skip an element that should be hidden, for example.
-
-How to test accessibility: Go to Dev tools and use lighthouse
-But best is to test a screenreader on mac comm + f5
-*/
-
-
 const hamburgerBtn = document.querySelector('.hamburger-btn');
 const hamburgerMenu = document.querySelector('.hamburger-menu');
 
@@ -23,5 +5,35 @@ const hamburgerMenu = document.querySelector('.hamburger-menu');
 hamburgerBtn.addEventListener("click", function(){
    hamburgerMenu.classList.toggle('show-menu');
    hamburgerBtn.classList.toggle('close');
+   hamburgerBtn.setAttribute("aria-expanded", hamburgerMenu.classList.contains('show-menu'));
+}); 
+
+document.addEventListener("click", function(e){
+   if (!hamburgerMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+      hamburgerMenu.classList.remove('show-menu');
+      hamburgerBtn.classList.remove('close');
+      hamburgerBtn.setAttribute("aria-expanded", "false")
+}});
+
+document.addEventListener("keydown", function (e) {
+   if (e.key === 'Escape' && hamburgerMenu.classList.contains('show-menu')) {
+      hamburgerMenu.classList.remove('show-menu');
+      hamburgerBtn.classList.remove('close');
+      hamburgerBtn.focus();
+      hamburgerBtn.setAttribute("aria-expanded", "false")
+   }
 });
+
+document.addEventListener("keydown", function (e) {
+   if (e.key === 'Escape' && hamburgerMenu.classList.contains('show-menu')) {
+      hamburgerMenu.classList.remove('show-menu');
+      hamburgerBtn.classList.remove('close');
+      hamburgerBtn.focus();
+      hamburgerBtn.setAttribute("aria-expanded", "false")
+   }
+});
+
+
+
+
 
